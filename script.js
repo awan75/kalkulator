@@ -8,7 +8,6 @@ const backspace = document.querySelector('.btn-backspace');
 const clear = document.querySelector('.btn-clear');
 
 
-
 //memasukan inputan ke layar
 buttons.forEach(btn => {
     btn.addEventListener('click', function(e){
@@ -19,14 +18,26 @@ buttons.forEach(btn => {
 });
 
 //menjumlahkan
-equal.addEventListener('click', function(){
-    if(screen.value === '') {
-        screen.value = '';
-    } else {
-       let answer = eval(screen.value);
-       screen.value = answer;
-    }
+// Konversi operator "x" menjadi "*"
+function convertPerkalian(expression) {
+  return expression.replace(/x/g, '*')
+};
+function convertPembagian(expression) {
+  return expression.replace(/:/g, '/')
+};
+
+equal.addEventListener('click', function () {
+  if (screen.value === '') {
+    screen.value = '';
+  } else {
+
+    let expression = convertPerkalian(screen.value);
+    expression = convertPembagian(expression);
+    let answer = eval(expression);
+    screen.value = answer;
+  }
 });
+
 
 //menghapus
 backspace.addEventListener('click', function() {
